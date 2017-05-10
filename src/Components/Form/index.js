@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
-import LoggedInHoc from './HOCLoggedIn';
-import firebase from './firebase';
+import LoggedInHoc from '../HOC/HOCLoggedIn';
+import firebase from '../../firebase';
+import PropTypes from 'prop-types';
+
+import { FormButton, Input } from './style';
 
 class Form extends Component {
+  static propTypes = {
+    uuid: PropTypes.string.isRequired
+  };
+
   state = {
     title: '',
     url: '',
@@ -24,15 +31,14 @@ class Form extends Component {
       dateAdded: firebase.database.ServerValue.TIMESTAMP,
       tags: tagsToArray
     };
-    firebase.database().ref('/favourites').push(body).then(snap => {
-      this.setState({
-        title: '',
-        url: '',
-        description: '',
-        author: '',
-        tags: ''
-      });
-    });
+
+    fetch(
+      `https://stevenfitzpatrick-5181b.firebaseio.com/favourites.json?auth=${this.props.uuid}`,
+      {
+        method: 'POST',
+        body: JSON.stringify(body)
+      }
+    );
   };
 
   handleChange = e => {
@@ -49,7 +55,7 @@ class Form extends Component {
       <form onSubmit={this.handleSubmit}>
         <div>
           <label htmlFor="title">Title</label>
-          <input
+          <Input
             name="title"
             type="text"
             value={title}
@@ -61,7 +67,7 @@ class Form extends Component {
         </div>
         <div>
           <label htmlFor="Url">Url</label>
-          <input
+          <Input
             name="url"
             type="text"
             value={url}
@@ -72,7 +78,7 @@ class Form extends Component {
         </div>
         <div>
           <label htmlFor="author">Author</label>
-          <input
+          <Input
             name="author"
             type="author"
             required
@@ -83,7 +89,7 @@ class Form extends Component {
         </div>
         <div>
           <label htmlFor="description">Description</label>
-          <input
+          <Input
             name="description"
             type="text"
             required
@@ -94,7 +100,7 @@ class Form extends Component {
         </div>
         <div>
           <label htmlFor="tags">Tags</label>
-          <input
+          <Input
             name="tags"
             type="text"
             value={tags}
@@ -103,7 +109,7 @@ class Form extends Component {
             onChange={this.handleChange}
           />
         </div>
-        <button type="submit">Submit</button>
+        <FormButton type="submit">Submit</FormButton>
       </form>
     );
   }

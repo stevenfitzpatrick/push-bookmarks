@@ -1,5 +1,134 @@
-body {
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+img,
+a,
+button,
+blockquote,
+figure,
+ol,
+ul {
   margin: 0;
   padding: 0;
-  font-family: 'Rock Salt', cursive;
+  border: 0;
+  vertical-align: baseline;
+  font-size: inherit;
+  font-synthesis: none;
+}
+
+main,
+footer,
+header,
+main {
+  display: block;
+}
+
+strong {
+  font-weight: bold;
+}
+
+a,
+button {
+  color: inherit;
+  transition: 0.3s;
+}
+
+code,
+pre,
+kbd,
+samp {
+  font-family: "Operator Mono", Inconsolata, Monaco, Consolas, "Andale Mono", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
+  margin: 0;
+}
+
+abbr[title] {
+  border-bottom: 1px dotted;
+  text-decoration: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+:focus {
+  outline: 0;
+}
+
+img {
+  border: 0;
+}
+
+button {
+  overflow: visible;
+  border: 0;
+  font: inherit;
+  -webkit-font-smoothing: inherit;
+  letter-spacing: inherit;
+  background: none;
+  cursor: pointer;
+}
+
+figcaption {
+  text-align: center;
+  font-style: italic;
+  font-weight: 100;
+  font-size: 0.85em;
+}
+
+// Scrollbars
+
+*::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+*::-webkit-scrollbar-track {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+// Selection Color  
+::selection {
+  background-color: $header; /* WebKit/Blink Browsers */
+  color: #fff;
+}
+
+::-moz-selection {
+  background-color: $header; /* Gecko Browsers */
+  color: #fff;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', cursive;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  height: 100%;
+  width: 100%;
+  overflow-x:hidden;
+}
+
+*, *:after, *:before {
+  box-sizing: border-box;
 }

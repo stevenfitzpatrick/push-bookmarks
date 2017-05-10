@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import auth from 'firebase/auth';
-import firebase from './firebase';
+import firebase from '../../firebase';
+import PropTypes from 'prop-types';
 
 class Login extends Component {
+  static propTypes = {
+    onLogin: PropTypes.func.isRequired
+  };
   handleLogin = () => {
     const auth = firebase.auth();
     const provider = new firebase.auth.GithubAuthProvider();
@@ -10,8 +14,9 @@ class Login extends Component {
   };
 
   authHandler = authData => {
-    const uuid = authData.uid;
-    this.props.onLogin(uuid);
+    authData.user.getToken().then(data => {
+      this.props.onLogin(data);
+    });
   };
 
   componentDidMount() {

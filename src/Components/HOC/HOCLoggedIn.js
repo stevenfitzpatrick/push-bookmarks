@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Login from './Login';
+import Login from '../Login';
 
 const LoggedInHoc = WrappedComponent => {
   return class LoggedIn extends Component {
@@ -16,8 +16,9 @@ const LoggedInHoc = WrappedComponent => {
     };
 
     render() {
-      return this.state.isLoggedIn
-        ? <WrappedComponent {...this.props} uuid={this.state.uuid} />
+      const { uuid, isLoggedIn } = this.state;
+      return isLoggedIn
+        ? <WrappedComponent {...this.props} uuid={uuid} />
         : <Login {...this.props} onLogin={this.onLogin} />;
     }
   };
